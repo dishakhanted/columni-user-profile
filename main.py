@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.responses import JSONResponse
 from typing import Optional
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
 
 import uvicorn
 
