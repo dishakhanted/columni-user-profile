@@ -11,6 +11,11 @@ import uvicorn
 
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+async def root():
+    return RedirectResponse("/static/index.html")
 
 class NewProfile(BaseModel):
     user_id : int
