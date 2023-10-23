@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from typing import Optional
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
-
+from fastapi.responses import RedirectResponse
 import uvicorn
 
 
