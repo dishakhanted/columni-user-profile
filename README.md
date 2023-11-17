@@ -30,3 +30,5 @@ the repo.
 There is more details in the comments in the file.
 
 
+ docker build -t my-fastapi-app .
+docker run -p 8010:8010 my-fastapi-app
