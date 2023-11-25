@@ -1,0 +1,5 @@
+export PSQL_DATABASE="columni_userdb"
+export PSQL_USER="postgres"
+export PSQL_HOST="columni-user-db.cnuwaz8dqxjy.us-east-1.rds.amazonaws.com"
+export PSQL_PASSWORD="Disha101"
+export PSQL_PORT="5432"
