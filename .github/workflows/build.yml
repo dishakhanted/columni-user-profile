@@ -47,6 +47,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
+    needs: build
 
     steps:
     - name: Deploy to EC2
