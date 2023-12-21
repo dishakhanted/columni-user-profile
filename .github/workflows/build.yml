@@ -42,7 +42,7 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          053467565326.dkr.ecr.us-east-1.amazonaws.com/columni:${{ github.event.pull_request.head.ref == null || 'dev-' }}${{ github.run_number }}
+          053467565326.dkr.ecr.us-east-1.amazonaws.com/columni:${{ github.event.pull_request.head.ref == null && 'v' || 'dev-v' }}${{ github.run_number }}
           053467565326.dkr.ecr.us-east-1.amazonaws.com/columni:${{ github.event.pull_request.head.ref == null && 'latest' || 'dev' }}
 
     # - name: Deploy to EC2
