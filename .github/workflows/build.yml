@@ -5,6 +5,13 @@ on:
     branches: [ main ]
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test'
+        required: false
+        type: boolean
+
 
 jobs:
   build-and-deploy:
