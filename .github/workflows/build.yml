@@ -1,4 +1,4 @@
-name: Python Application CI/CD
+name: Build Pipeline
 
 on:
   pull_request:
