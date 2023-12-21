@@ -14,7 +14,7 @@ on:
 
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: self-hosted
 
     steps:
@@ -45,7 +45,18 @@ jobs:
           053467565326.dkr.ecr.us-east-1.amazonaws.com/columni:${{ github.event.pull_request.head.ref == null && 'v' || 'dev-v' }}${{ github.run_number }}
           053467565326.dkr.ecr.us-east-1.amazonaws.com/columni:${{ github.event.pull_request.head.ref == null && 'latest' || 'dev' }}
 
-    # - name: Deploy to EC2
-    #   if: github.ref == 'refs/heads/main'
-    #   run: |
-    #     # Add your deployment script here
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Deploy to EC2
+      if: github.ref == 'refs/heads/main'
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+      run: |
+        sudo apt-get update && sudo apt-get install -y openssh-client
+        eval "$(ssh-agent -s)"
+        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+        mkdir -p ~/.ssh
+        echo "StrictHostKeyChecking no" > ~/.ssh/config
+        ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ubuntu@3.217.79.42 'bash -s' < docker run --name columni_users -p 8011:8011 053467565326.dkr.ecr.us-east-1.amazonaws.com/columni:latest
