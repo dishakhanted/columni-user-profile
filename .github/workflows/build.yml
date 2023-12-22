@@ -60,8 +60,8 @@ jobs:
         echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
         mkdir -p ~/.ssh
         echo "StrictHostKeyChecking no" > ~/.ssh/config
-        ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ubuntu@3.217.79.42 
+        ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ubuntu@3.217.79.42 <<< EOF
         docker kill columni_users 2> /dev/null || true
         docker system prune -a -f
         docker run --name columni_users -d -p 8011:8011 053467565326.dkr.ecr.us-east-1.amazonaws.com/columni:latest
-        exit
+        EOF
